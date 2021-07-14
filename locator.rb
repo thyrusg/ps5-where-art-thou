@@ -1,8 +1,8 @@
 require 'httparty'
 require 'oga'
 
-out_of_stock_statues = ["SOLD_OUT", "Not Available"]
-in_stock_statues = ["ADD_TO_CART", "Available"]
+out_of_stock_statues = ["SOLD_OUT", "Not Available", " Sold Out "]
+in_stock_statues = ["ADD_TO_CART", "Available", "Add to Cart"]
 
 best_buy_body = HTTParty.get("https://www.bestbuy.com/site/sony-playstation-5-console/6426149.p?skuId=6426149").body
 best_buy_document = Oga.parse_html(best_buy_body)
@@ -28,13 +28,14 @@ else
   puts "No PS5s currently available"
 end
 
+<<<<<<< HEAD
+antonline_body = HTTParty.get("https://www.antonline.com/Sony/Electronics/Gaming_Devices/Gaming_Consoles/1430137").body
+antonline_document = Oga.parse_html(antonline_body)
 
-costco_body = HTTParty.get("https://www.costco.com/sony-playstation-5-gaming-console-bundle.product.100691489.html").body
-costco_document = Oga.parse_html(costco_body)
+antonline_add_to_cart_button = antonline_document.at_css(".uk-button")
+antonline_status = antonline_add_to_cart_button.text
 
-costco_add_to_cart_button = costco_document.at_css("#add-to-cart")
-costco_status = !costco_add_to_cart_button.attributes.last.value.include?("out-of-stock")
-if costco_status
+if in_stock_statues.include?(antonline_status)
   puts "PS5 in stock order now"
 else
   puts "No PS5s currently available"

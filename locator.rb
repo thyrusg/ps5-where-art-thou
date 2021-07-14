@@ -27,3 +27,15 @@ if in_stock_statues.include?(gamestop_status)
 else
   puts "No PS5s currently available"
 end
+
+
+costco_body = HTTParty.get("https://www.costco.com/sony-playstation-5-gaming-console-bundle.product.100691489.html").body
+costco_document = Oga.parse_html(costco_body)
+
+costco_add_to_cart_button = costco_document.at_css("#add-to-cart")
+costco_status = !costco_add_to_cart_button.attributes.last.value.include?("out-of-stock")
+if costco_status
+  puts "PS5 in stock order now"
+else
+  puts "No PS5s currently available"
+end

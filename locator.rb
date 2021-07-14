@@ -41,7 +41,6 @@ else
   puts "S: No PS5s currently available"
 end
 
-<<<<<<< HEAD
 antonline_body = HTTParty.get("https://www.antonline.com/Sony/Electronics/Gaming_Devices/Gaming_Consoles/1430137").body
 antonline_document = Oga.parse_html(antonline_body)
 

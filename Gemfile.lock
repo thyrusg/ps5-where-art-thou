@@ -3,9 +3,11 @@ GEM
   specs:
     ansi (1.5.0)
     ast (2.4.2)
+    coderay (1.1.3)
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
+    method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0704)
@@ -13,6 +15,9 @@ GEM
     oga (3.3)
       ast
       ruby-ll (~> 2.1)
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     ruby-ll (2.1.2)
       ansi
       ast
@@ -23,6 +28,7 @@ PLATFORMS
 DEPENDENCIES
   httparty
   oga
+  pry
 
 BUNDLED WITH
    2.1.4

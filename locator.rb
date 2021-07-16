@@ -1,5 +1,17 @@
 require 'httparty'
 require 'oga'
+require 'json'
+
+
+
+def notify_discord(message)
+  discord_user_id = ENV["DISCORD_USER_ID"].to_i
+  discord_webhook_url = ENV["DISCORD_WEBHOOK_URL"]
+  discord_mention_string = "<@#{discord_user_id}>"
+  headers = {"Content-Type"=>"application/json"}
+  body = {:content=>"#{message} #{discord_mention_string}", :allowed_mentions=>{:users=>["#{discord_user_id}"]}}
+  HTTParty.post(discord_webhook_url, headers: headers, body: body.to_json)
+end
 
 out_of_stock_statues = ["SOLD_OUT", "Not Available", " Sold Out "]
 in_stock_statues = ["ADD_TO_CART", "Available", "Add to Cart"]

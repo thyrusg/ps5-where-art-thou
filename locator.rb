@@ -2,8 +2,6 @@ require 'httparty'
 require 'oga'
 require 'json'
 
-
-
 def notify_discord(message)
   discord_user_id = ENV["DISCORD_USER_ID"].to_i
   discord_webhook_url = ENV["DISCORD_WEBHOOK_URL"]
@@ -24,6 +22,7 @@ best_buy_add_to_cart_button = best_buy_document.at_css('.add-to-cart-button')
 best_buy_status = best_buy_add_to_cart_button.attributes.select {|attr| attr.name == "data-button-state"}[0].value
 if in_stock_statues.include?(best_buy_status)
   puts "BB: PS5 in stock order now"
+  notify_discord("PS5 Available at Best Buy at #{best_buy_url}")
 else
   puts "BB: No PS5s currently available"
   notify_discord("PS5 Available at Best Buy")
@@ -39,6 +38,7 @@ gamestop_status = JSON.parse(gamestop_status_data.value)["productInfo"]["availab
 
 if in_stock_statues.include?(gamestop_status)
   puts "GS: PS5 in stock order now"
+  notify_discord("PS5 Available at Gamestop at #{gamestop_url}")
 else
   puts "GS: No PS5s currently available"
 end
@@ -53,6 +53,7 @@ sony_status = !sony_button_hidden
 
 if sony_status
   puts "S: PS5 in stock order now"
+  notify_discord("PS5 Available at Sony at #{sony_url}")
 else
   puts "S: No PS5s currently available"
 end
@@ -66,6 +67,7 @@ antonline_status = antonline_add_to_cart_button.text
 
 if in_stock_statues.include?(antonline_status)
   puts "PS5 in stock order now"
+  notify_discord("PS5 Available at AntOnline at #{antonline_url}")
 else
   puts "No PS5s currently available"
 end

@@ -25,7 +25,6 @@ if in_stock_statues.include?(best_buy_status)
   notify_discord("PS5 Available at Best Buy at #{best_buy_url}")
 else
   puts "BB: No PS5s currently available"
-  notify_discord("PS5 Available at Best Buy")
 end
 
 gamestop_url = "https://www.gamestop.com/video-games/playstation-5/consoles/products/playstation-5/11108140.html"
@@ -66,8 +65,8 @@ antonline_add_to_cart_button = antonline_document.at_css(".uk-button")
 antonline_status = antonline_add_to_cart_button.text
 
 if in_stock_statues.include?(antonline_status)
-  puts "PS5 in stock order now"
+  puts "AO: PS5 in stock order now"
   notify_discord("PS5 Available at AntOnline at #{antonline_url}")
 else
-  puts "No PS5s currently available"
+  puts "AO: No PS5s currently available"
 end
